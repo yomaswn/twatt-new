@@ -16,9 +16,9 @@ var client = new Twit({
   access_token_secret:  config.access_token_secret,
 })
 
-router.get('/search', function(req,res,next){
-  let quer = req.query.q
-  client.get('search/tweets', { q: quer }, function(error, data, response) {
+router.get('/tweet', function(req,res,next){
+  let quer = {status: req.query.q}
+  client.post('statuses/update', quer, function(error, data, response) {
     if (error) throw error;
   res.send(data)
   })
